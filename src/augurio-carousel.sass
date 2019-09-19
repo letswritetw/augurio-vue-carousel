@@ -1,0 +1,73 @@
+// carousel items
+.carousel-wrap
+	position: relative
+	width: 100%
+	overflow: hidden
+	border: 2px solid rgba(#fff, .1)
+	box-shadow: 0 10px 20px rgba(0, 0, 0, .19), 0 6px 6px rgba(0, 0, 0, .23)
+	.item
+		position: absolute
+		top: 0
+		right: 0
+		left: 0
+		bottom: 0
+		display: flex
+		justify-content: center
+		align-items: center
+		width: 100%
+		background: #000
+		color: #FFF
+		opacity: 1
+		&:first-of-type
+			position: relative
+		img
+			display: block
+			max-width: 100%
+		a
+			display: block
+	
+// buttons: prev, next
+.button-prev, .button-next, .dot-group
+	position: absolute
+	z-index: 1
+.button-prev, .button-next
+	top: 50%
+	transform: translateY(-50%)
+	transition: opacity .3s
+	&:hover
+		opacity: .7
+	img
+		display: block
+		max-width: 50px
+.button-next
+	right: 0
+
+// dots
+.dot-group
+	right: 0
+	bottom: 8px
+	left: 0
+	display: flex
+	justify-content: center
+	a
+		display: block
+		margin-right: 8px
+		margin-left: 8px
+		width: 16px
+		height: 16px
+		background: rgba(#fff, .5)
+		border: 2px solid rgba(#FFF, .5)
+		border-radius: 50%
+		transition: .3s
+		&:hover, &.active
+			background: #fff
+
+// carousel effect
+.carousel-prev-enter-active, .carousel-prev-leave-active,
+.carousel-next-enter-active, .carousel-next-leave-active
+	transition: transform 1s ease
+	will-change: transform
+.carousel-next-enter, .carousel-prev-leave-to
+	transform: translateX(100%)
+.carousel-next-leave-to, .carousel-prev-enter
+	transform: translateX(-100%)

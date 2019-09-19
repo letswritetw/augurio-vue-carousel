@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+  <head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
+    <title>Augurio Carousel - Augustus - Let's Write</title>
+    <link rel="canonical" href="https://auguston.github.io/augurio-vue-carousel/"/>
+    <meta property="og:url" content="https://auguston.github.io/augurio-vue-carousel/"/>
+    <meta property="og:site_name" content="Let's Write"/>
+    <meta property="og:title" content="Augurio Carousel - Augustus - Let's Write"/>
+    <meta itemprop="name" content="Augurio Carousel - Augustus - Let's Write"/>
+    <meta name="description" content="由Augustus開發的carousel/slider，使用Vue.js transition製作，直接就有lazyload效果。"/>
+    <meta property="og:description" content="由Augustus開發的carousel/slider，使用Vue.js transition製作，直接就有lazyload效果。"/>
+    <meta itemprop="description" content="由Augustus開發的carousel/slider，使用Vue.js transition製作，直接就有lazyload效果。"/>
+    <meta itemprop="image" content="https://auguston.github.io/augurio-vue-carousel/dist/fb.jpg"/>
+    <meta property="og:image" content="https://auguston.github.io/augurio-vue-carousel/dist/fb.jpg"/>
+    <link rel="shortcut icon" href="dist/favicon.png"/>
+    <style>
+      *, *::before, *::after {
+        -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+      }
+      html, body, .container {
+        height: 100vh;
+        overflow-y: hidden;
+      }
+      .container {
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-pack: center;
+          -ms-flex-pack: center;
+            justify-content: center;
+        -webkit-box-align: center;
+          -ms-flex-align: center;
+            align-items: center;
+        margin-right: auto;
+        margin-left: auto;
+        max-width: 900px;
+      }
+      .bg {
+        position: fixed;
+        top: 0;
+        left: 0;
+        z-index: -1;
+        width: 100vw;
+        height: 100vh;
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center center;
+        -webkit-filter: blur(8px);
+          filter: blur(8px);
+        -webkit-transition: background-image 0.5s;
+        -o-transition: background-image 0.5s;
+        transition: background-image 0.5s;
+      }
+      .bg::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        right: 0;
+        left: 0;
+        bottom: 0;
+        background: -webkit-gradient(linear, left top, left bottom, from(rgba(0, 0, 0, 0)), to(rgba(0, 0, 0, 0.2)));
+        background: -o-linear-gradient(top, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.2) 100%);
+        background: linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.2) 100%);
+      }
+      
+    </style>
+    <link rel="stylesheet" href="dist/augurio-carousel.min.css"/>
+    <script async="async" src="https://www.googletagmanager.com/gtag/js?id=UA-74398300-1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'UA-74398300-1');
+      
+    </script>
+  </head>
+  <body>
+    <div id="app">
+      <div class="bg" :style="'background-image: url(' + carousels[show].img + ')'"></div>
+      <div class="container">
+        <div class="carousel-wrap" ref="carousel" data-auto="true" data-delay="5000" @mouseenter.stop="toggleTimer = false" @mouseleave.stop="toggleTimer = true" @touchstart.stop="touchStart" @touchmove.stop="touchMove" :style="'min-height:' + minHeight ">
+          <keep-alive>
+            <transition :name="carouselName">
+              <div class="item" v-for="(s, i) in carousels" v-if="show == i" :key="i"><a :href="s.href"><img :src="s.img"/></a></div>
+            </transition>
+          </keep-alive><a class="button-prev" href="#" @click.prevent="toPrev"><img src="//akveo.github.io/eva-icons/outline/png/128/arrow-ios-back-outline.png"/></a><a class="button-next" href="#" @click.prevent="toNext"><img src="//akveo.github.io/eva-icons/outline/png/128/arrow-ios-forward-outline.png"/></a>
+          <div class="dot-group"><a v-for="(l, i) in len" href="#" :class="{ 'active': show == i }" @click.prevent="show = i"></a></div>
+        </div>
+      </div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.10/vue.js"></script>
+    <script src="dist/augurio-carousel.min.js"></script>
+  </body>
+</html>
