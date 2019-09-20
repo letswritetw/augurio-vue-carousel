@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
 
-    <title>Augurio Carousel - Augustus - Let's Write</title>
+    <title>Augurio Carousel Component - Augustus - Let's Write</title>
 
     <link rel="canonical" href="https://auguston.github.io/augurio-vue-carousel/"/>
     <meta property="og:url" content="https://auguston.github.io/augurio-vue-carousel/"/>
@@ -23,6 +23,7 @@
 
     <link rel="shortcut icon" href="dist/favicon.png"/>
 
+    <!-- style 是讓carousel絕對置中用的，可刪-->
     <style>
       *, *::before, *::after {
         -webkit-box-sizing: border-box;
@@ -46,33 +47,6 @@
         margin-left: auto;
         max-width: 900px;
       }
-      .bg {
-        position: fixed;
-        top: 0;
-        left: 0;
-        z-index: -1;
-        width: 100vw;
-        height: 100vh;
-        background-size: cover;
-        background-repeat: no-repeat;
-        background-position: center center;
-        -webkit-filter: blur(8px);
-          filter: blur(8px);
-        -webkit-transition: background-image 0.5s;
-        -o-transition: background-image 0.5s;
-        transition: background-image 0.5s;
-      }
-      .bg::before {
-        content: "";
-        position: absolute;
-        top: 0;
-        right: 0;
-        left: 0;
-        bottom: 0;
-        background: -webkit-gradient(linear, left top, left bottom, from(rgba(0, 0, 0, 0)), to(rgba(0, 0, 0, 0.2)));
-        background: -o-linear-gradient(top, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.2) 100%);
-        background: linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.2) 100%);
-      }
       
     </style>
 
@@ -93,40 +67,40 @@
 
     <div id="app">
 
-      <!-- .bg 是另外增加頁面效果，可刪-->
-      <div class="bg" :style="'background-image: url(' + carousels[show].img + ')'"></div>
-
       <div class="container">
 
-        <!-- carousel-->
-        <!-- data-auto 是否自動輪播，預設false。 data-delay 間隔多久，預設3000。-->
-        <!-- data-arrows, data-dots 是否有箭頭、點點-->
-        <div class="carousel-wrap" ref="carousel" data-auto="true" data-delay="3000" data-arrows="true" data-dots="true" @mouseenter.stop="toggleTimer = false" @mouseleave.stop="toggleTimer = true" @touchstart.stop="touchStart" @touchmove.stop="touchMove" :style="'min-height:' + minHeight ">
+        <!-- auto 是否自動輪播，預設false。-->
+        <!-- delay 間隔多久，預設3000。-->
+        <!-- dots 是否要有圓點，預設true。-->
+        <!-- arrows 是否要有箭頭，預設true-->
+        <!-- carousels 輪播的內容-->
+        <augurio-carousel :auto="true" :delay="5000" :dots="true" :arrows="true" :carousels="[{img: 'https://picsum.photos/900/506?image=508',href: '#'}, { img: 'https://picsum.photos/900/506?image=1068', href: '#' },{ img: 'https://picsum.photos/900/506?image=509', href: '#' }]">
 
-          <!-- carousel items-->
-          <keep-alive>
+          <!-- 想改箭頭的話，可以加上slot-->
+          <template slot="arrows-prev"><img src="//akveo.github.io/eva-icons/outline/png/128/arrow-ios-back-outline.png"/></template>
+          <template slot="arrows-next"><img src="//akveo.github.io/eva-icons/outline/png/128/arrow-ios-forward-outline.png"/></template>
 
-            <transition :name="carouselName">
-
-              <div class="item" v-for="(s, i) in carousels" v-if="show == i" :key="i"><a :href="s.href"><img :src="s.img"/></a></div>
-
-            </transition>
-
-          </keep-alive>
-
-          <!-- button: prev, next-->
-          <div class="arrows-group" v-if="arrows"><a class="button-prev" href="#" @click.prevent="toPrev"><img src="//akveo.github.io/eva-icons/outline/png/128/arrow-ios-back-outline.png"/></a><a class="button-next" href="#" @click.prevent="toNext"><img src="//akveo.github.io/eva-icons/outline/png/128/arrow-ios-forward-outline.png"/></a></div>
-
-          <div class="dot-group" v-if="dots"><a v-for="(l, i) in len" href="#" :class="{ 'active': show == i }" @click.prevent="show = i"></a></div>
-
-        </div>
+        </augurio-carousel>
 
       </div>
 
     </div>
 
+
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.10/vue.js"></script>
-    <script src="dist/augurio-carousel.min.js"></script>
+
+    <!-- es6 import code-->
+    <script type="module">
+      import AugurioCarousel from './src/AugurioCarousel.js';
+      new Vue({
+        el: '#app',
+        components: {
+          AugurioCarousel
+        }
+      });
+      
+    </script>
 
   </body>
 </html>

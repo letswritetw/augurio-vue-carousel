@@ -1,33 +1,21 @@
-// import AugurioCarousel from 'component';
-
-// new Vue({
-// 	el: '#app',
-// 	components: {
-// 		AugurioCarousel
-// 	}
-// })
-// carousel items
-const carousels = [
-	{
-		img: 'https://picsum.photos/900/506?image=508',
-		href: "#"
-	},
-	{
-		img: 'https://picsum.photos/900/506?image=1068',
-		href: "#"
-	},
-	{
-		img: 'https://picsum.photos/900/506?image=509',
-		href: "#"
-	}
-];
-
-
-new Vue({
+const AugusrioCarousel = new Vue({
   el: '#app',
   data: {
 		carouselName: 'carousel-next',
-		carousels: carousels,
+		carousels: [
+			{
+				img: 'https://picsum.photos/900/506?image=508',
+				href: "#"
+			},
+			{
+				img: 'https://picsum.photos/900/506?image=1068',
+				href: "#"
+			},
+			{
+				img: 'https://picsum.photos/900/506?image=509',
+				href: "#"
+			}
+		],
 		len: 0,
     show: 0,
 		xDown: null, // for swiper
@@ -36,7 +24,9 @@ new Vue({
 		timer: null, // auto play
 		timerDelay: 3000, // 自動輪播間隔秒數
 		toggleTimer: true, // pause auto play
-		minHeight: 0 // 抓最小高度
+		minHeight: 0, // 抓最小高度
+		arrows: true, // 是否要有箭頭，預設 true
+		dots: true // 是否要有小點，預設 true
   },
 	methods: {
 		toNext() {
@@ -77,9 +67,15 @@ new Vue({
 	},
 	mounted() {
 		this.len = this.carousels.length;
-		this.autoplay = this.$refs.carousel.dataset.auto == 'true';
-		this.timerDelay = Number(this.$refs.carousel.dataset.delay) || 3000;
+
+		const data = this.$refs.carousel.dataset;
+		this.autoplay = data.auto == 'true';
+		this.timerDelay = Number(data.delay) || 3000;
+		this.arrows = data.arrows == 'true';
+		this.dots = data.dots == 'true';
+
 		if(this.autoplay) this.autoPlay();
+		
 		window.addEventListener('load', () => {
 			this.minHeight = this.$refs.carousel.offsetHeight + 'px';
 		});

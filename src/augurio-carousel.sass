@@ -26,41 +26,41 @@
 		a
 			display: block
 	
-// buttons: prev, next
-.button-prev, .button-next, .dot-group
-	position: absolute
-	z-index: 1
-.button-prev, .button-next
-	top: 50%
-	transform: translateY(-50%)
-	transition: opacity .3s
-	&:hover
-		opacity: .7
-	img
-		display: block
-		max-width: 50px
-.button-next
-	right: 0
+	// buttons: prev, next
+	.button-prev, .button-next, .dot-group
+		position: absolute
+		z-index: 1
+	.button-prev, .button-next
+		top: 50%
+		transform: translateY(-50%)
+		transition: opacity .3s
+		&:hover
+			opacity: .7
+		img
+			display: block
+			max-width: 50px
+	.button-next
+		right: 0
 
-// dots
-.dot-group
-	right: 0
-	bottom: 8px
-	left: 0
-	display: flex
-	justify-content: center
-	a
-		display: block
-		margin-right: 8px
-		margin-left: 8px
-		width: 16px
-		height: 16px
-		background: rgba(#fff, .5)
-		border: 2px solid rgba(#FFF, .5)
-		border-radius: 50%
-		transition: .3s
-		&:hover, &.active
-			background: #fff
+	// dots
+	.dot-group
+		right: 0
+		bottom: 8px
+		left: 0
+		display: flex
+		justify-content: center
+		a
+			display: block
+			margin-right: 8px
+			margin-left: 8px
+			width: 16px
+			height: 16px
+			background: rgba(#fff, .5)
+			border: 2px solid rgba(#FFF, .5)
+			border-radius: 50%
+			transition: .3s
+			&:hover, &.active
+				background: #fff
 
 // carousel effect
 .carousel-prev-enter-active, .carousel-prev-leave-active,

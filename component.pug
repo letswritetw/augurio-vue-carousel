@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+html(lang="zh-TW")
+  head
+    meta(charset="UTF-8")
+    meta(name="viewport", content="width=device-width, initial-scale=1.0")
+    meta(http-equiv="X-UA-Compatible", content="ie=edge")
+
+    ='\n'
+
+    title Augurio Carousel Component - Augustus - Let's Write
+
+    ='\n'
+
+    link(rel="canonical", href="https://auguston.github.io/augurio-vue-carousel/")
+    meta(property="og:url", content="https://auguston.github.io/augurio-vue-carousel/")
+
+    ='\n'
+
+    meta(property="og:site_name", content="Let's Write")
+    meta(property="og:title", content="Augurio Carousel - Augustus - Let's Write")
+    meta(itemprop="name", content="Augurio Carousel - Augustus - Let's Write")
+
+    ='\n'
+
+    meta(name="description", content="由Augustus開發的carousel/slider，使用Vue.js transition製作，直接就有lazyload效果。")
+    meta(property="og:description", content="由Augustus開發的carousel/slider，使用Vue.js transition製作，直接就有lazyload效果。")
+    meta(itemprop="description", content="由Augustus開發的carousel/slider，使用Vue.js transition製作，直接就有lazyload效果。")
+
+    ='\n'
+
+    meta(itemprop="image", content="https://auguston.github.io/augurio-vue-carousel/dist/fb.jpg")
+    meta(property="og:image", content="https://auguston.github.io/augurio-vue-carousel/dist/fb.jpg")
+
+    ='\n'
+
+    link(rel="shortcut icon", href="dist/favicon.png")
+
+    ='\n'
+
+    // style 是讓carousel絕對置中用的，可刪
+    style.
+      *, *::before, *::after {
+        -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+      }
+      html, body, .container {
+        height: 100vh;
+        overflow-y: hidden;
+      }
+      .container {
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-pack: center;
+          -ms-flex-pack: center;
+            justify-content: center;
+        -webkit-box-align: center;
+          -ms-flex-align: center;
+            align-items: center;
+        margin-right: auto;
+        margin-left: auto;
+        max-width: 900px;
+      }
+    
+    ='\n'
+
+    link(rel="stylesheet", href="dist/augurio-carousel.min.css")
+
+    ='\n'
+
+    script(async, src='https://www.googletagmanager.com/gtag/js?id=UA-74398300-1')
+    script.
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'UA-74398300-1');
+
+    ='\n'
+
+  ='\n'
+
+  body
+
+    ='\n'
+
+    #app
+
+      ='\n'
+
+      //- container
+      .container
+        
+        ='\n'
+
+        // auto 是否自動輪播，預設false。
+        // delay 間隔多久，預設3000。
+        // dots 是否要有圓點，預設true。
+        // arrows 是否要有箭頭，預設true
+        // carousels 輪播的內容
+        augurio-carousel(:auto="true", :delay="5000", :dots="true", :arrows="true",
+                          :carousels="[{img: 'https://picsum.photos/900/506?image=508',href: '#'}, { img: 'https://picsum.photos/900/506?image=1068', href: '#' },{ img: 'https://picsum.photos/900/506?image=509', href: '#' }]")
+          
+          ='\n'
+
+          // 想改箭頭的話，可以加上slot
+          template(slot="arrows-prev")
+            img(src="//akveo.github.io/eva-icons/outline/png/128/arrow-ios-back-outline.png")
+          template(slot="arrows-next")
+            img(src="//akveo.github.io/eva-icons/outline/png/128/arrow-ios-forward-outline.png")
+          
+          ='\n'
+        
+        ='\n'
+      
+      ='\n'
+
+    ='\n'
+    ='\n'
+    ='\n'
+
+    script(src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.10/vue.js")
+
+    ='\n'
+
+    // es6 import code
+    script(type="module").
+      import AugurioCarousel from './src/AugurioCarousel.js';
+      new Vue({
+        el: '#app',
+        components: {
+          AugurioCarousel
+        }
+      });
+    
+    ='\n'

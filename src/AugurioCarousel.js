@@ -1,14 +1,16 @@
 export default {
-  template: `
+  template: /*html*/`
     <div class="carousel-wrap" ref="carousel"
-          data-auto="true" data-delay="5000"
           @mouseenter.stop="toggleTimer = false"
           @mouseleave.stop="toggleTimer = true"
           @touchstart.stop="touchStart"
           @touchmove.stop="touchMove"
-          :style="'min-height:' + minHeight ">
+          :style="'min-height:' + minHeight">
+          
       <keep-alive>
+
         <transition :name="carouselName">
+
           <div class="item"
                 v-for="(s, i) in carousels"
                 v-if="show == i"
@@ -18,46 +20,64 @@ export default {
               <img :src="s.img"/>
             </a>
           </div>
+          
         </transition>
+
       </keep-alive>
-      <a class="button-prev" href="#" @click.prevent="toPrev">
-        <img src="//akveo.github.io/eva-icons/outline/png/128/arrow-ios-back-outline.png"/>
-      </a>
-      <a class="button-next" href="#" @click.prevent="toNext">
-        <img src="//akveo.github.io/eva-icons/outline/png/128/arrow-ios-forward-outline.png"/>
-      </a>
-      <div class="dot-group">
+
+      <!-- arrows -->
+      <div class="arrows-group" v-if="arrows">
+        <a class="button-prev" href="#" @click.prevent="toPrev">
+          <slot name="arrows-prev">
+            <img src="//akveo.github.io/eva-icons/outline/png/128/arrow-ios-back-outline.png"/>
+          </slot>
+        </a>
+        <a class="button-next" href="#" @click.prevent="toNext">
+          <slot name="arrows-next">
+            <img src="//akveo.github.io/eva-icons/outline/png/128/arrow-ios-forward-outline.png"/>
+          </slot>
+        </a>
+      </div>
+
+      <!-- dots -->
+      <div class="dot-group" v-if="dots">
         <a v-for="(l, i) in len" href="#"
             :class="{ 'active': show == i }"
             @click.prevent="show = i"
         ></a>
       </div>
+
     </div>
   `,
-  data: function() {
+  props: {
+    carousels: {
+      type: Array
+    },
+    auto: {
+      type: Boolean,
+      default: false
+    },
+    delay: {
+      type: Number,
+      default: 3000
+    },
+    dots: {
+      type: Boolean,
+      default: true
+    },
+    arrows: {
+      type: Boolean,
+      default: true
+    }
+  },
+  data: () => {
     return {
       carouselName: 'carousel-next',
-      carousels: [
-        {
-          img: 'https://picsum.photos/900/506?image=508',
-          href: "#"
-        },
-        {
-          img: 'https://picsum.photos/900/506?image=1068',
-          href: "#"
-        },
-        {
-          img: 'https://picsum.photos/900/506?image=509',
-          href: "#"
-        }
-      ],
       len: 0,
       show: 0,
       xDown: null, // for swiper
       yDown: null, // for swiper
       autoplay: false, // 是否自動輪播
-      timer: null, // auto play
-      timerDelay: 3000, // 自動輪播間隔秒數
       toggleTimer: true, // pause auto play
       minHeight: 0 // 抓最小高度
     }
@@ -96,14 +116,13 @@ export default {
 		autoPlay() {
 			setInterval(() => {
 				if(this.toggleTimer) this.toNext();
-			}, this.timerDelay);
+			}, this.delay);
 		}
-	},
+  },
 	mounted() {
-		this.len = this.carousels.length;
-		this.autoplay = this.$refs.carousel.dataset.auto == 'true';
-		this.timerDelay = Number(this.$refs.carousel.dataset.delay) || 3000;
-		if(this.autoplay) this.autoPlay();
+    this.len = this.carousels.length;
+    if(this.len <= 1) this.arrows = false;
+		if(this.auto) this.autoPlay();
 		window.addEventListener('load', () => {
 			this.minHeight = this.$refs.carousel.offsetHeight + 'px';
 		});
