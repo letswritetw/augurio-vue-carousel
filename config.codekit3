@@ -255,12 +255,6 @@
 		"function-sent": {
 			"active": 0
 			},
-		"inline-consecutive-adds": {
-			"active": 0
-			},
-		"inline-environment-variables": {
-			"active": 0
-			},
 		"instanceof": {
 			"active": 0
 			},
@@ -282,36 +276,6 @@
 		"minify-booleans": {
 			"active": 0
 			},
-		"minify-builtins": {
-			"active": 0
-			},
-		"minify-constant-folding": {
-			"active": 0
-			},
-		"minify-dead-code-elimination": {
-			"active": 0
-			},
-		"minify-flip-comparisons": {
-			"active": 0
-			},
-		"minify-guarded-expressions": {
-			"active": 0
-			},
-		"minify-infinity": {
-			"active": 0
-			},
-		"minify-mangle-names": {
-			"active": 0
-			},
-		"minify-numeric-literals": {
-			"active": 0
-			},
-		"minify-simplify": {
-			"active": 0
-			},
-		"minify-type-constructors": {
-			"active": 0
-			},
 		"modules-amd": {
 			"active": 0
 			},
@@ -322,9 +286,6 @@
 			"active": 0
 			},
 		"modules-umd": {
-			"active": 0
-			},
-		"named-capturing-groups-regex": {
 			"active": 0
 			},
 		"new-target": {
@@ -360,13 +321,7 @@
 		"parameters": {
 			"active": 1
 			},
-		"partial-application": {
-			"active": 0
-			},
 		"pipeline-operator": {
-			"active": 0
-			},
-		"private-methods": {
 			"active": 0
 			},
 		"property-literals": {
@@ -402,16 +357,10 @@
 		"regenerator": {
 			"active": 0
 			},
-		"regexp-constructors": {
-			"active": 0
-			},
 		"remove-console": {
 			"active": 0
 			},
 		"remove-debugger": {
-			"active": 0
-			},
-		"remove-undefined": {
 			"active": 0
 			},
 		"reserved-words": {
