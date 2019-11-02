@@ -10,6 +10,6 @@
 
 ## Demo
 
-index：[https://auguston.github.io/augurio-vue-carousel/](https://auguston.github.io/augurio-vue-carousel/)
+index：<https://letswritetw.github.io/augurio-vue-carousel/>
 
-component：[https://auguston.github.io/augurio-vue-carousel/component.html](https://auguston.github.io/augurio-vue-carousel/component.html)
+component：<https://letswritetw.github.io/augurio-vue-carousel/component.html>
